@@ -1,26 +1,27 @@
 const { render } = require('ejs')
 const express = require('express')
 const router = express.Router()
+const Users = require('../models/users')
 
-router.get('/', (req, res) => {
-    res.render('index.ejs', {
-        name: "unknown"
-    })
+
+
+router.get('/', async (req, res) => {
+    try {
+        let searchOptions = {}
+        searchOptions.email = new RegExp("tom@tom")
+        const findTom = await Users.findOne(searchOptions)
+        
+        searchOptions = {}
+        const users = await Users.find(searchOptions)
+        res.render('index.ejs', {
+            users: users,
+            name:  findTom.name //"unknown"
+        })
+    } catch (error) {
+        console.log(error)
+    }
 })
 
-router.get('/login', (req, res) => {
-    res.render('login.ejs')
-})
-
-router.get('/register', (req, res) => {
-    res.render('register.ejs')
-})
-
-router.post('/register', (req, res) => {
-    res.render('index.ejs', {
-        name: req.body.regName
-    })
-})
 
 
 module.exports = router
