@@ -1,0 +1,21 @@
+<div>
+    <label for=<%= positionID %> >Position</label>
+    <select id=<%= positionID %> name=<%= positionID %>>
+        <%- include('../partials/positions') %>
+    </select>
+    <label for=<%= developerID %>>Developer</label>
+    <select id=<%= developerID %> name=<%= developerID %>>
+        <% devs.forEach(dev => { %>
+            <option value=<%= dev.email %> >
+                <%= dev.lastName %>,&nbsp;<%= dev.firstName %>
+            </option>
+        <% }) %>
+    </select>
+    <form action="/projects/<%= projID %>/delPos/<%=  role.projDevID %> ?_method=DELETE" method="POST">
+        <button  type="submit">Delete</button>
+    </form>
+</div>
+<script>
+    document.getElementById("<%= positionID %>").value = "<%= role.role %>";
+    document.getElementById("<%= developerID %>").value = "<%= role.developer %>";
+</script>

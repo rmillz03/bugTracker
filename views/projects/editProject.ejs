@@ -1,0 +1,35 @@
+<h1>Edit Details</h1>
+<form action= "/projects/<%= project.projID %>?_method=PUT" method="POST">
+    <div>
+        <label for="projectID">ProjectID</label>
+        <input type="text" id="projectID" name="projectID" readonly value="<%= project.projID %>">
+    </div>
+    <div>
+        <label for="creator">Creator</label>
+        <input type="email" id="creator" name="creator"  readonly value="<%= project.creator %>">
+    </div>
+    <div>
+        <label for="title">Title</label>
+        <input type="text" id="title" name="title" value="<%= project.title %>">
+    </div>
+    <div>
+        <label for="description">Description</label>
+        <textarea id="description" name="descritpion" rows="4" cols="50"
+            value="<%= project.description %>"><%= project.description %>
+        </textarea>
+    </div>
+    <div>
+        <label for="status">Status</label>
+        <input type="text" id="status" name="status" value ="<%= project.status %>">
+    </div>
+    <div>
+        <label for="start">Start Date</label>
+        <input type="text" id="start" name="start" readonly value="<%= project.startDate %>">
+    </div>
+    <div>
+        <label for="comp">Completed Date</label>
+        <input type="text" id="comp" name="comp" value="<%= project.compDate %>">
+    </div>
+    <button type="submit">Update</button>
+    <a href="/projects/<%= project.projID %>/view">Cancel</a>
+</form>

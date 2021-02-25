@@ -1,0 +1,58 @@
+<h1>project details</h1>
+<table>
+    <tr>
+        <th>ID</th>
+        <th>data</th>
+    </tr>
+    <tr>
+        <td>Project ID</td>
+        <td><%= project.projID %></td>
+    </tr>
+    <tr>
+        <td>Creator</td>
+        <td><%= project.creator %></td>
+    </tr>
+    <tr>
+        <td>Title</td>
+        <td><%= project.title %></td>
+    </tr>
+    <tr>
+        <td>Description</td>
+        <td><%= project.description %></td>
+    </tr>
+    <tr>
+        <td>Status</td>
+        <td><%= project.status %></td>
+    </tr>
+    <tr>
+        <td>Start Date</td>
+        <td><%= project.startDate %></td>
+    </tr>
+    <tr>
+        <td>Completed Date</td>
+        <td><%= project.compDate %></td>
+    </tr>
+</table>
+<br />
+<a href="/projects/<%= project.projID %>/edit">Edit Details</a>
+
+<h1>Project Team</h1>
+<div id='positions'>
+    <table>
+        <tr>
+            <th>Position</th>
+            <th>Developer</th>
+        </tr>
+        <!-- position list goes here-->
+        <% devs.forEach(dev => { %>    
+            <tr>
+                <td><%= dev.role %></td>
+                <td><%= dev.developer %></td>
+            </tr>
+        <% }); %>
+    </table>
+</div>
+
+<br />
+<a href="/projects/<%= project.projID %>/editPos">Add/Edit Positions</a>
+    

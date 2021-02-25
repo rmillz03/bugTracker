@@ -1,0 +1,39 @@
+<h1>test</h1>
+<form action="/projects/test" method="POST">
+    <div id="positionList">
+        <!-- new elements go here -->
+    </div>
+    <br />
+    <input type="button" onclick="newPosition()" value="Add Position" />
+    <button type="submit">Submit positions</button>
+</form>
+
+<script>
+    var posNum = 1;
+
+    function newPosition() {
+        var posString = "position" + posNum;
+        var devString = "developer" + posNum;
+
+        var newPosition = document.createElement('div');
+
+        newPosition.innerHTML = `
+            <label for=${posString}>Position</label>
+            <select id=${posString} name=${posString}>
+                <%- include('../partials/positions') %>
+            </select>
+            <label for=${devString}>Developer</label>
+            <select id=${devString} name=${devString}>
+                <% devs.forEach(dev => { %>
+                    <option value='<%= dev.email %>'>
+                        <%= dev.lastName %>,&nbsp<%= dev.firstName %>
+                    </option>
+                <% }) %>
+            </select>
+            `;
+
+        document.getElementById("positionList").appendChild(newPosition);
+
+        posNum = posNum + 1;
+    }
+</script>

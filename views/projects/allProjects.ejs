@@ -1,0 +1,16 @@
+<h1>All projects</h1>
+<% projects.forEach(proj => { %>
+   <div>
+      <!-- <script>
+         var projectRef = "/projects/projectDetails/"+"<%= proj.projID %>";
+         document.write('<a href="' + projectRef + '"><%= proj.title %></a>');
+       </script> -->
+       <p><%= proj.title %></p>
+       <%- include('../partials/viewEditDelete.ejs',
+               { url: `/projects/${proj.projID}` }) %> 
+    </div>
+<% }) %>
+<br />
+<a href="/projects/createProject">Create Projects</a>
+
+

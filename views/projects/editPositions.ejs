@@ -1,0 +1,64 @@
+<h1>Add positions</h1>
+<div>
+    <label for="projectID">ProjectID</label>
+    <input type="text" id="projectID" name="projectID" readonly value="<%= projID %>">
+</div>
+<div>
+    <label for="title">Title</label>
+    <input type="text" id="title" name="title" readonly value="<%= projTitle %>">
+</div>
+<form action="/projects/<%= projID %>/addPos" method="POST">
+    <div id="CurrentPositions">
+        <% let selectorNum = 1000 %>
+        <% roles.forEach(role => { %>
+            <%- include('../partials/currPositions.ejs', {role: role, positionID: "position"+selectorNum,developerID: "developer"+selectorNum}); %>
+            <% selectorNum = selectorNum + 1; %>
+        <% }); %> 
+    </div>
+    <div id="positionList">
+        <!-- new elements go here -->
+    </div>
+    <br />
+    <input type="button" onclick="newPosition()" value="Add Position" />
+    <button type="submit">Submit positions</button>
+    <a href="/projects/<%= projID %>/view">Cancel</a>
+</form>
+
+<script>
+    var posNum = 1;
+
+    function newPosition() {
+        var posString = "position" + posNum;
+        var devString = "developer" + posNum;
+
+        var newPosition = document.createElement('div');
+        
+        newPosition.setAttribute("id",  posString);
+
+        newPosition.innerHTML = `
+            <label for=${posString}>Position</label>
+            <select id=${posString} name=${posString}>
+                <%- include('../partials/positions') %>
+            </select>
+            <label for=${devString}>Developer</label>
+            <select id=${devString} name=${devString}>
+                <% devs.forEach(dev => { %>
+                    <option value='<%= dev.email %>'>
+                        <%= dev.lastName %>,&nbsp<%= dev.firstName %>
+                    </option>
+                <% }) %>
+            </select>
+            <input type="button" value="Delete" onClick="deletePosition(${posNum})" />
+            `;
+
+        document.getElementById("positionList").appendChild(newPosition);
+
+        posNum = posNum + 1;
+    }
+
+    function deletePosition(elementName) {
+        var childNode = document.getElementById("position"+elementName);
+        var parentNode = document.getElementById("positionList");
+        parentNode.removeChild(childNode);
+    }
+</script>

@@ -20,6 +20,8 @@ passport.use(new LocalStrategy({ usernameField: 'email' },
                     return done(null, false, { message: 'Incorrect password.' });
                 }
 
+
+                //return authenticated user
                 return done(null, user);
 
             });
